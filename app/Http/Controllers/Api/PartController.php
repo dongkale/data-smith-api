@@ -34,7 +34,7 @@ class PartController extends Controller
      *     path="/list",
      *     summary="",
      *     tags={"- 전체 리스트 요청"},
-     *     description="전체 리스트 요청",
+     *     description="전체 리스트 요청, header.X-API-Key에 Api Key 필요",
      *     security={{"api-key": {}},},
      *     @OA\Response(
      *         response="200",
@@ -91,7 +91,7 @@ class PartController extends Controller
      *     path="/list/{id}",
      *     summary="",
      *     tags={"- 지정 파츠 요청"},
-     *     description="지정 파츠 요청",
+     *     description="지정 파츠 요청, header.X-API-Key에 Api Key 필요",
      *     security={{"api-key": {}},},
      *     @OA\Parameter(
      *         description="지정 파츠 id",
@@ -152,7 +152,7 @@ class PartController extends Controller
      *     path="/listByName/{name}",
      *     summary="",
      *     tags={"- 지정 파츠 요청(name 지정)"},
-     *     description="지정 파츠 요청",
+     *     description="지정 파츠 요청, header.X-API-Key에 Api Key 필요",
      *     security={{"api-key": {}},},
      *     @OA\Parameter(
      *         description="지정 파츠 name",
@@ -213,7 +213,7 @@ class PartController extends Controller
      *     path="/save",
      *     summary="",
      *     tags={"- 파츠 저장"},
-     *     description="파츠 저장, 지정 이름, 설명을 json data로 요청하면 저장한다",
+     *     description="파츠 저장, 지정 이름, 설명을 json data로 요청하면 저장한다. header.X-API-Key에 Api Key 필요",
      *     security={{"api-key": {}},},
      *     @OA\RequestBody(
      *          @OA\JsonContent(

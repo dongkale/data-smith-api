@@ -25,7 +25,7 @@
                     "- 전체 리스트 요청"
                 ],
                 "summary": "",
-                "description": "전체 리스트 요청",
+                "description": "전체 리스트 요청, header.X-API-Key에 Api Key 필요",
                 "operationId": "4519c82ab6f988d56bb33a3f6c4acb2d",
                 "responses": {
                     "200": {
@@ -87,7 +87,7 @@
                     "- 지정 파츠 요청"
                 ],
                 "summary": "",
-                "description": "지정 파츠 요청",
+                "description": "지정 파츠 요청, header.X-API-Key에 Api Key 필요",
                 "operationId": "e5372e443cea6e800b17e6f943e3bfa3",
                 "parameters": [
                     {
@@ -166,7 +166,7 @@
                     "- 지정 파츠 요청(name 지정)"
                 ],
                 "summary": "",
-                "description": "지정 파츠 요청",
+                "description": "지정 파츠 요청, header.X-API-Key에 Api Key 필요",
                 "operationId": "a30f7f66017dd52a34856bd7544d80b9",
                 "parameters": [
                     {
@@ -245,7 +245,7 @@
                     "- 파츠 저장"
                 ],
                 "summary": "",
-                "description": "파츠 저장, 지정 이름, 설명을 json data로 요청하면 저장한다",
+                "description": "파츠 저장, 지정 이름, 설명을 json data로 요청하면 저장한다. header.X-API-Key에 Api Key 필요",
                 "operationId": "83982f1c8038ef0325623908c7f4c4d6",
                 "requestBody": {
                     "content": {
