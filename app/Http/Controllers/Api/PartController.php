@@ -295,26 +295,23 @@ class PartController extends Controller
             ]);
         }
 
-        $part = Part::where("name", "=", $name);
-        if (empty($part->first())) {
-            return response()->json([
-                "resultCode" => -1,
-                "resultMessage" => "Part not found",
-            ]);
-        }
-
-        DB::beginTransaction();
         try {
+            $part = Part::where("name", "=", $name);
+            if (empty($part->first())) {
+                return response()->json([
+                    "resultCode" => -1,
+                    "resultMessage" => "Part not found",
+                ]);
+            }
+
             $part->update([
                 "description" => $request->description,
                 "data_json" => $request->dataJson,
+                "updated_at" => now(),
             ]);
-
-            DB::commit();
 
             $part = $part->first();
         } catch (\Exception $e) {
-            DB::rollback();
             Log::error("Database Update Fail: " . $e->getMessage());
             return response()->json([
                 "resultCode" => -1,
@@ -369,21 +366,19 @@ class PartController extends Controller
      */
     public function deleteByName(Request $request, $name)
     {
-        DB::beginTransaction();
         try {
-            $part = Part::where("name", "=", $name)->first();
-            if (empty($part)) {
+            $part = Part::where("name", "=", $name);
+            if (empty($part->first())) {
                 return response()->json([
                     "resultCode" => -1,
                     "resultMessage" => "Part not found",
                 ]);
             }
 
-            Part::where("name", "=", $name)->delete();
+            $partBackup = $part->first();
 
-            DB::commit();
+            $part->delete();
         } catch (\Exception $e) {
-            DB::rollback();
             Log::error("Database Delete Fail: " . $e->getMessage());
             return response()->json([
                 "resultCode" => -1,
@@ -395,10 +390,10 @@ class PartController extends Controller
             "resultCode" => 0,
             "resultMessage" => "Success",
             "resultData" => [
-                "id" => $part->id,
-                "name" => $part->name,
-                "description" => $part->description,
-                "dataJson" => $part->data_json,
+                "id" => $partBackup->id,
+                "name" => $partBackup->name,
+                "description" => $partBackup->description,
+                "dataJson" => $partBackup->data_json,
             ],
         ]);
     }
@@ -539,6 +534,7 @@ class PartController extends Controller
             $part->update([
                 "description" => $request->description,
                 "data_json" => $request->dataJson,
+                "updated_at" => now(),
             ]);
 
             DB::commit();
