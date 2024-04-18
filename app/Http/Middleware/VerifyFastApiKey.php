@@ -15,7 +15,7 @@ class VerifyFastApiKey
      */
     public function handle(Request $request, Closure $next): Response
     {
-        $apiKey = config("app.key");
+        $apiKey = config("app.api-key");
 
         $apiKeyIsValid =
             !empty($apiKey) && $request->header("x-api-key") == $apiKey;

@@ -24,11 +24,20 @@ Route::middleware(["logger", "with_fast_api_key"])->group(function () {
     Route::prefix("part")->group(function () {
         Route::get("/list", [PartController::class, "index"]);
         Route::post("/save", [PartController::class, "store"]);
-        Route::get("/list/{id}", [PartController::class, "show"]);
+
         Route::get("/listByName/{name}", [PartController::class, "partByName"]);
 
-        // Route::get("/{id}", [ItemController::class, "show"]);
-        // Route::put('items/{id}', [ItemController::class, 'update']);
-        // Route::delete('items/{id}', [ItemController::class, 'destroy']);
+        Route::put("/updateByName/{name}", [
+            PartController::class,
+            "updateByName",
+        ]);
+
+        Route::delete("/deleteByName/{name}", [
+            PartController::class,
+            "deleteByName",
+        ]);
+
+        Route::get("/list/{id}", [PartController::class, "show"]);
+        Route::put("/update/{id}", [PartController::class, "update"]);
     });
 });
