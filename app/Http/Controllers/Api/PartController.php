@@ -90,8 +90,8 @@ class PartController extends Controller
      *         in="path",
      *         name="id",
      *         required=true,
-     *         @OA\Schema(type="int"),
-     *         @OA\Examples(example="int", value="1", summary="paramter"),
+     *         @OA\Schema(type="integer"),
+     *         @OA\Examples(example="integer", value=1, summary="paramter"),
      *     ),
      *     @OA\Response(
      *          response="200",

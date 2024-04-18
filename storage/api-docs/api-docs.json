@@ -96,12 +96,12 @@
                         "description": "지정 파츠 id",
                         "required": true,
                         "schema": {
-                            "type": "int"
+                            "type": "integer"
                         },
                         "examples": {
-                            "int": {
+                            "integer": {
                                 "summary": "paramter",
-                                "value": "1"
+                                "value": 1
                             }
                         }
                     }
