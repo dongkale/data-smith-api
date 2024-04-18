@@ -47,18 +47,18 @@ class PartController extends Controller
      *         response="200",
      *         description="결과값",
      *         @OA\JsonContent(
-     *             @OA\Property(property="result_code", type="int", example="0", description="성공:0, 실패:-1"),
-     *             @OA\Property(property="result_message", type="string", example="Success", description="성공:Success, 실패:에러메세지"),
-     *             @OA\Property(property="result_data", type="array",
+     *             @OA\Property(property="resultCode", type="int", example="0", description="성공:0, 실패:-1"),
+     *             @OA\Property(property="resultMessage", type="string", example="Success", description="성공:Success, 실패:에러메세지"),
+     *             @OA\Property(property="resultData", type="array",
      *                  @OA\Items(
      *                      @OA\Property(property="name", type="string", description="이름", example="이름 1"),
      *                      @OA\Property(property="description", type="string", description="설명", example="설명 1"),
-     *                      @OA\Property(property="data_json", type="string", description="JSON 문자열", example="{}"),
+     *                      @OA\Property(property="dataJson", type="string", description="JSON 문자열", example="{}"),
      *                  ),
      *                  @OA\Items(
      *                      @OA\Property(property="name", type="string", description="이름", example="sample_2"),
      *                      @OA\Property(property="description", type="string", description="설명", example="설명 2"),
-     *                      @OA\Property(property="data_json", type="string", description="JSON 문자열", example="{}"),
+     *                      @OA\Property(property="dataJson", type="string", description="JSON 문자열", example="{}"),
      *                  ),
      *            )
      *         )
@@ -72,8 +72,8 @@ class PartController extends Controller
         } catch (\Exception $e) {
             Log::error("Database Query Fail: " . $e->getMessage());
             return response()->json([
-                "result_code" => -1,
-                "result_message" => "Database Query Fail",
+                "resultCode" => -1,
+                "resultMessage" => "Database Query Fail",
             ]);
         }
 
@@ -82,14 +82,14 @@ class PartController extends Controller
             $data[] = [
                 "name" => $part->name,
                 "description" => $part->description,
-                "data_json" => $part->data_json,
+                "dataJson" => $part->data_json,
             ];
         }
 
         return response()->json([
-            "result_code" => 0,
-            "result_message" => "Success",
-            "result_data" => $data,
+            "resultCode" => 0,
+            "resultMessage" => "Success",
+            "resultData" => $data,
         ]);
     }
 
@@ -112,45 +112,45 @@ class PartController extends Controller
      *          response="200",
      *          description="결과값",
      *          @OA\JsonContent(
-     *              @OA\Property(property="result_code", type="int", example="0", description="성공:0, 실패:-1"),
-     *              @OA\Property(property="result_message", type="string", example="Success", description="성공:Success, 실패:파츠가 존재 하지 않음"),
-     *              @OA\Property(property="result_data", type="array",
+     *              @OA\Property(property="resultCode", type="int", example="0", description="성공:0, 실패:-1"),
+     *              @OA\Property(property="resultMessage", type="string", example="Success", description="성공:Success, 실패:파츠가 존재 하지 않음"),
+     *              @OA\Property(property="resultData", type="array",
      *                  @OA\Items(
      *                      @OA\Property(property="name", type="string", description="이름", example="이름 1"),
      *                      @OA\Property(property="description", type="string", description="설명", example="설명 1"),
-     *                      @OA\Property(property="data_json", type="string", description="JSON 문자열", example="{}"),
+     *                      @OA\Property(property="dataJson", type="string", description="JSON 문자열", example="{}"),
      *                  ),
      *             )
      *         )
      *     )
      * )
      */
-    public function partByName($name)
+    public function listByName($name)
     {
         try {
             $part = Part::where("name", "=", $name)->first();
         } catch (\Exception $e) {
             Log::error("Database Query Fail: " . $e->getMessage());
             return response()->json([
-                "result_code" => -1,
-                "result_message" => "Database Query Fail",
+                "resultCode" => -1,
+                "resultMessage" => "Database Query Fail",
             ]);
         }
 
         if (empty($part)) {
             return response()->json([
-                "result_code" => -1,
-                "result_message" => "Part not found",
+                "resultCode" => -1,
+                "resultMessage" => "Part not found",
             ]);
         }
 
         return response()->json([
-            "result_code" => 0,
-            "result_message" => "Success",
-            "result_data" => [
+            "resultCode" => 0,
+            "resultMessage" => "Success",
+            "resultData" => [
                 "name" => $part->name,
                 "description" => $part->description,
-                "data_json" => $part->data_json,
+                "dataJson" => $part->data_json,
             ],
         ]);
     }
@@ -166,21 +166,21 @@ class PartController extends Controller
      *          @OA\JsonContent(
      *              @OA\Property(property="name", type="string", example="이름 1", description="이름 1"),
      *              @OA\Property(property="description", type="string", example="설명 1", description="설명 1"),
-     *              @OA\Property(property="data_json", type="string", example="{}", description="{}")
+     *              @OA\Property(property="dataJson", type="string", example="{}", description="{}")
      *         )
      *     ),
      *     @OA\Response(
      *          response="200",
      *          description="결과값",
      *          @OA\JsonContent(
-     *              @OA\Property(property="result_code", type="int", example="0", description="성공:0, 실패:-1"),
-     *              @OA\Property(property="result_message", type="string", example="Success", description="성공:EMPTY, 실패:에러메세지(데이터 포맷 미 일치"),
-     *              @OA\Property(property="result_data", type="array",
+     *              @OA\Property(property="resultCode", type="int", example="0", description="성공:0, 실패:-1"),
+     *              @OA\Property(property="resultMessage", type="string", example="Success", description="성공:EMPTY, 실패:에러메세지(데이터 포맷 미 일치"),
+     *              @OA\Property(property="resultData", type="array",
      *                  @OA\Items(
      *                      @OA\Property(property="id", type="int", description="Id", example="Id"),
      *                      @OA\Property(property="name", type="string", description="이름", example="이름 1"),
      *                      @OA\Property(property="description", type="string", description="설명", example="설명 1"),
-     *                      @OA\Property(property="data_json", type="string", description="JSON 문자열", example="{}"),
+     *                      @OA\Property(property="dataJson", type="string", description="JSON 문자열", example="{}"),
      *                  ),
      *             )
      *         )
@@ -192,41 +192,45 @@ class PartController extends Controller
         $validator = Validator::make($request->all(), [
             "name" => "required|max:128",
             "description" => "required|max:512",
-            "data_json" => "required",
+            "dataJson" => "required",
         ]);
 
         if ($validator->fails()) {
             return response()->json([
-                "result_code" => -1,
-                "result_message" => $validator->errors(),
+                "resultCode" => -1,
+                "resultMessage" => $validator->errors(),
             ]);
         }
 
-        if (!$this->isJson($request->data_json)) {
+        if (!$this->isJson($request->dataJson)) {
             return response()->json([
-                "result_code" => -1,
-                "result_message" => "'data_json' Invalid Json String Format",
+                "resultCode" => -1,
+                "resultMessage" => "'dataJson' Invalid Json String Format",
             ]);
         }
 
         try {
-            $part = Part::create($request->all());
+            $part = new Part();
+            $part->name = $request->name;
+            $part->description = $request->description;
+            $part->data_json = $request->dataJson;
+            $part->save();
         } catch (\Exception $e) {
             Log::error("Database Save Fail: " . $e->getMessage());
             return response()->json([
-                "result_code" => -1,
-                "result_message" => "Database Save Fail",
+                "resultCode" => -1,
+                "resultMessage" => "Database Save Fail",
             ]);
         }
 
         return response()->json([
-            "result_code" => 0,
-            "result_message" => "Success",
-            "result_data" => [
+            "resultCode" => 0,
+            "resultMessage" => "Success",
+            "resultData" => [
                 "id" => $part->id,
                 "name" => $part->name,
                 "description" => $part->description,
-                "data_json" => $part->data_json,
+                "dataJson" => $part->data_json,
             ],
         ]);
     }
@@ -249,21 +253,21 @@ class PartController extends Controller
      *     @OA\RequestBody(
      *          @OA\JsonContent(
      *              @OA\Property(property="description", type="string", example="설명 1", description="설명"),
-     *              @OA\Property(property="data_json", type="string", example="{}", description="{}")
+     *              @OA\Property(property="dataJson", type="string", example="{}", description="{}")
      *         )
      *     ),
      *     @OA\Response(
      *          response="200",
      *          description="결과값",
      *          @OA\JsonContent(
-     *              @OA\Property(property="result_code", type="int", example="0", description="성공:0, 실패:-1"),
-     *              @OA\Property(property="result_message", type="string", example="Success", description="성공:EMPTY, 실패:에러메세지(데이터 포맷 미 일치"),
-     *              @OA\Property(property="result_data", type="array",
+     *              @OA\Property(property="resultCode", type="int", example="0", description="성공:0, 실패:-1"),
+     *              @OA\Property(property="resultMessage", type="string", example="Success", description="성공:EMPTY, 실패:에러메세지(데이터 포맷 미 일치"),
+     *              @OA\Property(property="resultData", type="array",
      *                  @OA\Items(
      *                      @OA\Property(property="id", type="int", description="Id", example="Id"),
      *                      @OA\Property(property="name", type="string", description="이름", example="이름 1"),
      *                      @OA\Property(property="description", type="string", description="설명", example="설명 1"),
-     *                      @OA\Property(property="data_json", type="string", description="JSON 문자열", example="{}"),
+     *                      @OA\Property(property="dataJson", type="string", description="JSON 문자열", example="{}"),
      *                  ),
      *             )
      *         )
@@ -274,53 +278,58 @@ class PartController extends Controller
     {
         $validator = Validator::make($request->all(), [
             "description" => "required|max:512",
-            "data_json" => "required",
+            "dataJson" => "required",
         ]);
 
         if ($validator->fails()) {
             return response()->json([
-                "result_code" => -1,
-                "result_message" => $validator->errors(),
+                "resultCode" => -1,
+                "resultMessage" => $validator->errors(),
             ]);
         }
 
-        if (!$this->isJson($request->data_json)) {
+        if (!$this->isJson($request->dataJson)) {
             return response()->json([
-                "result_code" => -1,
-                "result_message" => "'data_json' Invalid Json String Format",
+                "resultCode" => -1,
+                "resultMessage" => "'dataJson' Invalid Json String Format",
+            ]);
+        }
+
+        $part = Part::where("name", "=", $name);
+        if (empty($part->first())) {
+            return response()->json([
+                "resultCode" => -1,
+                "resultMessage" => "Part not found",
             ]);
         }
 
         DB::beginTransaction();
         try {
-            $part = Part::where("name", "=", $name)->first();
-            if (empty($part)) {
-                return response()->json([
-                    "result_code" => -1,
-                    "result_message" => "Part not found",
-                ]);
-            }
-
-            $part->update($request->all());
+            $part->update([
+                "description" => $request->description,
+                "data_json" => $request->dataJson,
+            ]);
 
             DB::commit();
+
+            $part = $part->first();
         } catch (\Exception $e) {
             DB::rollback();
             Log::error("Database Update Fail: " . $e->getMessage());
             return response()->json([
-                "result_code" => -1,
-                "result_message" => "Database Update Fail",
+                "resultCode" => -1,
+                "resultMessage" => "Database Update Fail",
             ]);
         }
 
         return response()->json([
-            "result_code" => 0,
-            "result_message" => "Success",
-            "result_data" => [
+            "resultCode" => 0,
+            "resultMessage" => "Success",
+            "resultData" => [
                 "id" => $part->id,
                 "name" => $part->name,
                 "description" => $part->description,
-                "data_json" => $part->data_json,
+                "dataJson" => $part->dataJson,
             ],
         ]);
     }
@@ -344,14 +353,14 @@ class PartController extends Controller
      *          response="200",
      *          description="결과값",
      *          @OA\JsonContent(
-     *              @OA\Property(property="result_code", type="int", example="0", description="성공:0, 실패:-1"),
-     *              @OA\Property(property="result_message", type="string", example="Success", description="성공:EMPTY, 실패:에러메세지(데이터 포맷 미 일치"),
-     *              @OA\Property(property="result_data", type="array",
+     *              @OA\Property(property="resultCode", type="int", example="0", description="성공:0, 실패:-1"),
+     *              @OA\Property(property="resultMessage", type="string", example="Success", description="성공:EMPTY, 실패:에러메세지(데이터 포맷 미 일치"),
+     *              @OA\Property(property="resultData", type="array",
      *                  @OA\Items(
      *                      @OA\Property(property="id", type="int", description="Id", example="Id"),
      *                      @OA\Property(property="name", type="string", description="이름", example="이름 1"),
      *                      @OA\Property(property="description", type="string", description="설명", example="설명 1"),
-     *                      @OA\Property(property="data_json", type="string", description="JSON 문자열", example="{}"),
+     *                      @OA\Property(property="dataJson", type="string", description="JSON 문자열", example="{}"),
      *                  ),
      *             )
      *         )
@@ -365,8 +374,8 @@ class PartController extends Controller
             $part = Part::where("name", "=", $name)->first();
             if (empty($part)) {
                 return response()->json([
-                    "result_code" => -1,
-                    "result_message" => "Part not found",
+                    "resultCode" => -1,
+                    "resultMessage" => "Part not found",
                 ]);
             }
 
@@ -377,19 +386,19 @@ class PartController extends Controller
             DB::rollback();
             Log::error("Database Delete Fail: " . $e->getMessage());
             return response()->json([
-                "result_code" => -1,
-                "result_message" => "Database Delete Fail",
+                "resultCode" => -1,
+                "resultMessage" => "Database Delete Fail",
             ]);
         }
 
         return response()->json([
-            "result_code" => 0,
-            "result_message" => "Success",
-            "result_data" => [
+            "resultCode" => 0,
+            "resultMessage" => "Success",
+            "resultData" => [
                 "id" => $part->id,
                 "name" => $part->name,
                 "description" => $part->description,
-                "data_json" => $part->data_json,
+                "dataJson" => $part->data_json,
             ],
         ]);
     }
@@ -413,13 +422,13 @@ class PartController extends Controller
     //  *          response="200",
     //  *          description="결과값",
     //  *          @OA\JsonContent(
-    //  *              @OA\Property(property="result_code", type="int", example="0", description="성공:0, 실패:-1"),
-    //  *              @OA\Property(property="result_message", type="string", example="Success", description="성공:Success, 실패: 파츠가 존재 하지 않음"),
-    //  *              @OA\Property(property="result_data", type="array",
+    //  *              @OA\Property(property="resultCode", type="int", example="0", description="성공:0, 실패:-1"),
+    //  *              @OA\Property(property="resultMessage", type="string", example="Success", description="성공:Success, 실패: 파츠가 존재 하지 않음"),
+    //  *              @OA\Property(property="resultData", type="array",
     //  *                  @OA\Items(
     //  *                      @OA\Property(property="name", type="string", description="이름", example="이름 1"),
     //  *                      @OA\Property(property="description", type="string", description="설명", example="설명 1"),
-    //  *                      @OA\Property(property="data_json", type="string", description="JSON 문자열", example="{}"),
+    //  *                      @OA\Property(property="dataJson", type="string", description="JSON 문자열", example="{}"),
     //  *                  ),
     //  *             )
     //  *         )
@@ -433,25 +442,25 @@ class PartController extends Controller
         } catch (\Exception $e) {
             Log::error("Database Query Fail: " . $e->getMessage());
             return response()->json([
-                "result_code" => -1,
-                "result_message" => "Database Query Fail",
+                "resultCode" => -1,
+                "resultMessage" => "Database Query Fail",
             ]);
         }
 
         if (empty($part)) {
             return response()->json([
-                "result_code" => -1,
-                "result_message" => "Part not found",
+                "resultCode" => -1,
+                "resultMessage" => "Part not found",
             ]);
         }
 
         return response()->json([
-            "result_code" => 0,
-            "result_message" => "Success",
-            "result_data" => [
+            "resultCode" => 0,
+            "resultMessage" => "Success",
+            "resultData" => [
                 "name" => $part->name,
                 "description" => $part->description,
-                "data_json" => $part->data_json,
+                "dataJson" => $part->data_json,
             ],
         ]);
     }
@@ -475,21 +484,21 @@ class PartController extends Controller
     //  *          @OA\JsonContent(
     //  *              @OA\Property(property="name", type="string", example="이름 1", description="이름"),
     //  *              @OA\Property(property="description", type="string", example="설명 1", description="설명"),
-    //  *              @OA\Property(property="data_json", type="string", example="{}", description="{}")
+    //  *              @OA\Property(property="dataJson", type="string", example="{}", description="{}")
     //  *         )
     //  *     ),
     //  *     @OA\Response(
     //  *          response="200",
     //  *          description="결과값",
     //  *          @OA\JsonContent(
-    //  *              @OA\Property(property="result_code", type="int", example="0", description="성공:0, 실패:-1"),
-    //  *              @OA\Property(property="result_message", type="string", example="Success", description="성공:EMPTY, 실패:에러메세지(데이터 포맷 미 일치"),
-    //  *              @OA\Property(property="result_data", type="array",
+    //  *              @OA\Property(property="resultCode", type="int", example="0", description="성공:0, 실패:-1"),
+    //  *              @OA\Property(property="resultMessage", type="string", example="Success", description="성공:EMPTY, 실패:에러메세지(데이터 포맷 미 일치"),
+    //  *              @OA\Property(property="resultData", type="array",
     //  *                  @OA\Items(
     //  *                      @OA\Property(property="id", type="int", description="Id", example="Id"),
     //  *                      @OA\Property(property="name", type="string", description="이름", example="이름 1"),
     //  *                      @OA\Property(property="description", type="string", description="설명", example="설명 1"),
-    //  *                      @OA\Property(property="data_json", type="string", description="JSON 문자열", example="{}"),
+    //  *                      @OA\Property(property="dataJson", type="string", description="JSON 문자열", example="{}"),
     //  *                  ),
     //  *             )
     //  *         )
@@ -500,53 +509,58 @@ class PartController extends Controller
     {
         $validator = Validator::make($request->all(), [
             "description" => "required|max:512",
-            "data_json" => "required",
+            "dataJson" => "required",
         ]);
 
         if ($validator->fails()) {
             return response()->json([
-                "result_code" => -1,
-                "result_message" => $validator->errors(),
+                "resultCode" => -1,
+                "resultMessage" => $validator->errors(),
             ]);
         }
 
-        if (!$this->isJson($request->data_json)) {
+        if (!$this->isJson($request->dataJson)) {
             return response()->json([
-                "result_code" => -1,
-                "result_message" => "'data_json' Invalid Json String Format",
+                "resultCode" => -1,
+                "resultMessage" => "'dataJson' Invalid Json String Format",
+            ]);
+        }
+
+        $part = Part::where("id", "=", $id);
+        if (empty($part->first())) {
+            return response()->json([
+                "resultCode" => -1,
+                "resultMessage" => "Part not found",
             ]);
         }
 
         DB::beginTransaction();
         try {
-            $part = Part::where("id", "=", $id)->first();
-            if (empty($part)) {
-                return response()->json([
-                    "result_code" => -1,
-                    "result_message" => "Part not found",
-                ]);
-            }
-
-            $part->update($request->all());
+            $part->update([
+                "description" => $request->description,
+                "data_json" => $request->dataJson,
+            ]);
 
             DB::commit();
+
+            $part = $part->first();
         } catch (\Exception $e) {
             DB::rollback();
             Log::error("Database Update Fail: " . $e->getMessage());
             return response()->json([
-                "result_code" => -1,
-                "result_message" => "Database Update Fail",
+                "resultCode" => -1,
+                "resultMessage" => "Database Update Fail",
             ]);
         }
 
         return response()->json([
-            "result_code" => 0,
-            "result_message" => "Success",
-            "result_data" => [
+            "resultCode" => 0,
+            "resultMessage" => "Success",
+            "resultData" => [
                 "id" => $part->id,
                 "name" => $part->name,
                 "description" => $part->description,
-                "data_json" => $part->data_json,
+                "dataJson" => $part->dataJson,
             ],
         ]);
     }

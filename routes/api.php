@@ -25,7 +25,7 @@ Route::middleware(["logger", "with_fast_api_key"])->group(function () {
         Route::get("/list", [PartController::class, "index"]);
         Route::post("/save", [PartController::class, "store"]);
 
-        Route::get("/listByName/{name}", [PartController::class, "partByName"]);
+        Route::get("/listByName/{name}", [PartController::class, "listByName"]);
 
         Route::put("/updateByName/{name}", [
             PartController::class,

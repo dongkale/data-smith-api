@@ -34,17 +34,17 @@
                             "application/json": {
                                 "schema": {
                                     "properties": {
-                                        "result_code": {
+                                        "resultCode": {
                                             "description": "성공:0, 실패:-1",
                                             "type": "integer",
                                             "example": "0"
                                         },
-                                        "result_message": {
+                                        "resultMessage": {
                                             "description": "성공:Success, 실패:에러메세지",
                                             "type": "string",
                                             "example": "Success"
                                         },
-                                        "result_data": {
+                                        "resultData": {
                                             "type": "array",
                                             "items": {
                                                 "properties": {
@@ -58,7 +58,7 @@
                                                         "type": "string",
                                                         "example": "설명 1"
                                                     },
-                                                    "data_json": {
+                                                    "dataJson": {
                                                         "description": "JSON 문자열",
                                                         "type": "string",
                                                         "example": "{}"
@@ -88,7 +88,7 @@
                 ],
                 "summary": "",
                 "description": "지정 파츠를 요청 한다, header.X-API-Key에 Api Key 필요",
-                "operationId": "a30f7f66017dd52a34856bd7544d80b9",
+                "operationId": "b7c4e8a504a071d36f793b7839bced2f",
                 "parameters": [
                     {
                         "name": "name",
@@ -113,17 +113,17 @@
                             "application/json": {
                                 "schema": {
                                     "properties": {
-                                        "result_code": {
+                                        "resultCode": {
                                             "description": "성공:0, 실패:-1",
                                             "type": "integer",
                                             "example": "0"
                                         },
-                                        "result_message": {
+                                        "resultMessage": {
                                             "description": "성공:Success, 실패:파츠가 존재 하지 않음",
                                             "type": "string",
                                             "example": "Success"
                                         },
-                                        "result_data": {
+                                        "resultData": {
                                             "type": "array",
                                             "items": {
                                                 "properties": {
@@ -137,7 +137,7 @@
                                                         "type": "string",
                                                         "example": "설명 1"
                                                     },
-                                                    "data_json": {
+                                                    "dataJson": {
                                                         "description": "JSON 문자열",
                                                         "type": "string",
                                                         "example": "{}"
@@ -183,7 +183,7 @@
                                         "type": "string",
                                         "example": "설명 1"
                                     },
-                                    "data_json": {
+                                    "dataJson": {
                                         "description": "{}",
                                         "type": "string",
                                         "example": "{}"
@@ -201,17 +201,17 @@
                             "application/json": {
                                 "schema": {
                                     "properties": {
-                                        "result_code": {
+                                        "resultCode": {
                                             "description": "성공:0, 실패:-1",
                                             "type": "integer",
                                             "example": "0"
                                         },
-                                        "result_message": {
+                                        "resultMessage": {
                                             "description": "성공:EMPTY, 실패:에러메세지(데이터 포맷 미 일치",
                                             "type": "string",
                                             "example": "Success"
                                         },
-                                        "result_data": {
+                                        "resultData": {
                                             "type": "array",
                                             "items": {
                                                 "properties": {
@@ -230,7 +230,7 @@
                                                         "type": "string",
                                                         "example": "설명 1"
                                                     },
-                                                    "data_json": {
+                                                    "dataJson": {
                                                         "description": "JSON 문자열",
                                                         "type": "string",
                                                         "example": "{}"
@@ -288,7 +288,7 @@
                                         "type": "string",
                                         "example": "설명 1"
                                     },
-                                    "data_json": {
+                                    "dataJson": {
                                         "description": "{}",
                                         "type": "string",
                                         "example": "{}"
@@ -306,17 +306,17 @@
                             "application/json": {
                                 "schema": {
                                     "properties": {
-                                        "result_code": {
+                                        "resultCode": {
                                             "description": "성공:0, 실패:-1",
                                             "type": "integer",
                                             "example": "0"
                                         },
-                                        "result_message": {
+                                        "resultMessage": {
                                             "description": "성공:EMPTY, 실패:에러메세지(데이터 포맷 미 일치",
                                             "type": "string",
                                             "example": "Success"
                                         },
-                                        "result_data": {
+                                        "resultData": {
                                             "type": "array",
                                             "items": {
                                                 "properties": {
@@ -335,7 +335,7 @@
                                                         "type": "string",
                                                         "example": "설명 1"
                                                     },
-                                                    "data_json": {
+                                                    "dataJson": {
                                                         "description": "JSON 문자열",
                                                         "type": "string",
                                                         "example": "{}"
@@ -390,17 +390,17 @@
                             "application/json": {
                                 "schema": {
                                     "properties": {
-                                        "result_code": {
+                                        "resultCode": {
                                             "description": "성공:0, 실패:-1",
                                             "type": "integer",
                                             "example": "0"
                                         },
-                                        "result_message": {
+                                        "resultMessage": {
                                             "description": "성공:EMPTY, 실패:에러메세지(데이터 포맷 미 일치",
                                             "type": "string",
                                             "example": "Success"
                                         },
-                                        "result_data": {
+                                        "resultData": {
                                             "type": "array",
                                             "items": {
                                                 "properties": {
@@ -419,7 +419,7 @@
                                                         "type": "string",
                                                         "example": "설명 1"
                                                     },
-                                                    "data_json": {
+                                                    "dataJson": {
                                                         "description": "JSON 문자열",
                                                         "type": "string",
                                                         "example": "{}"
