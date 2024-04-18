@@ -122,17 +122,18 @@ class PartController extends Controller
     {
         try {
             $part = Part::where("id", "=", $id)->first();
-            if (empty($part)) {
-                return response()->json([
-                    "result_code" => -1,
-                    "result_message" => "Part not found",
-                ]);
-            }
         } catch (\Exception $e) {
             Log::error("Database Query Fail: " . $e->getMessage());
             return response()->json([
                 "result_code" => -1,
                 "result_message" => "Database Query Fail",
+            ]);
+        }
+
+        if (empty($part)) {
+            return response()->json([
+                "result_code" => -1,
+                "result_message" => "Part not found",
             ]);
         }
 
@@ -183,17 +184,18 @@ class PartController extends Controller
     {
         try {
             $part = Part::where("name", "=", $name)->first();
-            if (empty($part)) {
-                return response()->json([
-                    "result_code" => -1,
-                    "result_message" => "Part not found",
-                ]);
-            }
         } catch (\Exception $e) {
             Log::error("Database Query Fail: " . $e->getMessage());
             return response()->json([
                 "result_code" => -1,
                 "result_message" => "Database Query Fail",
+            ]);
+        }
+
+        if (empty($part)) {
+            return response()->json([
+                "result_code" => -1,
+                "result_message" => "Part not found",
             ]);
         }
 
@@ -255,6 +257,13 @@ class PartController extends Controller
             ]);
         }
 
+        if (!$this->isJson($request->data_json)) {
+            return response()->json([
+                "result_code" => -1,
+                "result_message" => "'data_json' Invalid Json String Format",
+            ]);
+        }
+
         try {
             $part = Part::create($request->all());
         } catch (\Exception $e) {
@@ -275,5 +284,11 @@ class PartController extends Controller
                 "data_json" => $part->data_json,
             ],
         ]);
+    }
+
+    function isJson($string)
+    {
+        json_decode($string);
+        return json_last_error() === JSON_ERROR_NONE;
     }
 }
