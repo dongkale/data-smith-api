@@ -73,7 +73,12 @@
                             }
                         }
                     }
-                }
+                },
+                "security": [
+                    {
+                        "api-key": []
+                    }
+                ]
             }
         },
         "/list/{id}": {
@@ -84,6 +89,23 @@
                 "summary": "",
                 "description": "지정 파츠 요청",
                 "operationId": "e5372e443cea6e800b17e6f943e3bfa3",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "지정 파츠 id",
+                        "required": true,
+                        "schema": {
+                            "type": "int"
+                        },
+                        "examples": {
+                            "int": {
+                                "summary": "paramter",
+                                "value": "1"
+                            }
+                        }
+                    }
+                ],
                 "responses": {
                     "200": {
                         "description": "결과값",
@@ -130,7 +152,12 @@
                             }
                         }
                     }
-                }
+                },
+                "security": [
+                    {
+                        "api-key": []
+                    }
+                ]
             }
         },
         "/listByName/{name}": {
@@ -141,6 +168,23 @@
                 "summary": "",
                 "description": "지정 파츠 요청",
                 "operationId": "a30f7f66017dd52a34856bd7544d80b9",
+                "parameters": [
+                    {
+                        "name": "name",
+                        "in": "path",
+                        "description": "지정 파츠 name",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        },
+                        "examples": {
+                            "string": {
+                                "summary": "paramter",
+                                "value": "name_01"
+                            }
+                        }
+                    }
+                ],
                 "responses": {
                     "200": {
                         "description": "결과값",
@@ -187,7 +231,12 @@
                             }
                         }
                     }
-                }
+                },
+                "security": [
+                    {
+                        "api-key": []
+                    }
+                ]
             }
         },
         "/save": {
@@ -270,7 +319,22 @@
                             }
                         }
                     }
-                }
+                },
+                "security": [
+                    {
+                        "api-key": []
+                    }
+                ]
+            }
+        }
+    },
+    "components": {
+        "securitySchemes": {
+            "api-key": {
+                "type": "apiKey",
+                "description": "Fast API Key",
+                "name": "X-API-KEY",
+                "in": "header"
             }
         }
     }

@@ -35,6 +35,7 @@ class PartController extends Controller
      *     summary="",
      *     tags={"- 전체 리스트 요청"},
      *     description="전체 리스트 요청",
+     *     security={{"api-key": {}},},
      *     @OA\Response(
      *         response="200",
      *         description="결과값",
@@ -83,6 +84,15 @@ class PartController extends Controller
      *     summary="",
      *     tags={"- 지정 파츠 요청"},
      *     description="지정 파츠 요청",
+     *     security={{"api-key": {}},},
+     *     @OA\Parameter(
+     *         description="지정 파츠 id",
+     *         in="path",
+     *         name="id",
+     *         required=true,
+     *         @OA\Schema(type="int"),
+     *         @OA\Examples(example="int", value="1", summary="paramter"),
+     *     ),
      *     @OA\Response(
      *          response="200",
      *          description="결과값",
@@ -127,6 +137,15 @@ class PartController extends Controller
      *     summary="",
      *     tags={"- 지정 파츠 요청(name 지정)"},
      *     description="지정 파츠 요청",
+     *     security={{"api-key": {}},},
+     *     @OA\Parameter(
+     *         description="지정 파츠 name",
+     *         in="path",
+     *         name="name",
+     *         required=true,
+     *         @OA\Schema(type="string"),
+     *         @OA\Examples(example="string", value="name_01", summary="paramter"),
+     *     ),
      *     @OA\Response(
      *          response="200",
      *          description="결과값",
@@ -171,6 +190,7 @@ class PartController extends Controller
      *     summary="",
      *     tags={"- 파츠 저장"},
      *     description="파츠 저장, 지정 이름, 설명을 json data로 요청하면 저장한다",
+     *     security={{"api-key": {}},},
      *     @OA\RequestBody(
      *          @OA\JsonContent(
      *              @OA\Property(property="name", type="string", example="이름 1", description="이름 1"),

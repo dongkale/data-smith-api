@@ -20,7 +20,7 @@ Route::middleware("auth:sanctum")->get("/user", function (Request $request) {
     return $request->user();
 });
 
-Route::middleware(["logger"])->group(function () {
+Route::middleware(["logger", "with_fast_api_key"])->group(function () {
     Route::prefix("part")->group(function () {
         Route::get("/list", [PartController::class, "index"]);
         Route::post("/save", [PartController::class, "store"]);
