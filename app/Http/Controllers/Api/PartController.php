@@ -32,7 +32,12 @@ class PartController extends Controller
 {
     function isJson($string)
     {
-        json_decode($string);
+        try {
+            json_decode($string);
+        } catch (\Exception $e) {
+            return false;
+        }
+
         return json_last_error() === JSON_ERROR_NONE;
     }
 
@@ -210,11 +215,11 @@ class PartController extends Controller
         }
 
         try {
-            $part = new Part();
-            $part->name = $request->name;
-            $part->description = $request->description;
-            $part->data_json = $request->dataJson;
-            $part->save();
+            $part = Part::create([
+                "name" => $request->name,
+                "description" => $request->description,
+                "data_json" => $request->dataJson,
+            ]);
         } catch (\Exception $e) {
             Log::error("Database Save Fail: " . $e->getMessage());
             return response()->json([
