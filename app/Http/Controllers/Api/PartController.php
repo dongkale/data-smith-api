@@ -60,7 +60,15 @@ class PartController extends Controller
      */
     public function index()
     {
-        $parts = Part::all();
+        try {
+            $parts = Part::all();
+        } catch (\Exception $e) {
+            Log::error("Database Query Fail: " . $e->getMessage());
+            return response()->json([
+                "result_code" => -1,
+                "result_message" => "Database Query Fail",
+            ]);
+        }
 
         $data = [];
         foreach ($parts as $part) {
@@ -112,11 +120,19 @@ class PartController extends Controller
      */
     public function show($id)
     {
-        $part = Part::where("id", "=", $id)->first();
-        if (empty($part)) {
+        try {
+            $part = Part::where("id", "=", $id)->first();
+            if (empty($part)) {
+                return response()->json([
+                    "result_code" => -1,
+                    "result_message" => "Part not found",
+                ]);
+            }
+        } catch (\Exception $e) {
+            Log::error("Database Query Fail: " . $e->getMessage());
             return response()->json([
                 "result_code" => -1,
-                "result_message" => "Part not found",
+                "result_message" => "Database Query Fail",
             ]);
         }
 
@@ -165,11 +181,19 @@ class PartController extends Controller
      */
     public function partByName($name)
     {
-        $part = Part::where("name", "=", $name)->first();
-        if (empty($part)) {
+        try {
+            $part = Part::where("name", "=", $name)->first();
+            if (empty($part)) {
+                return response()->json([
+                    "result_code" => -1,
+                    "result_message" => "Part not found",
+                ]);
+            }
+        } catch (\Exception $e) {
+            Log::error("Database Query Fail: " . $e->getMessage());
             return response()->json([
                 "result_code" => -1,
-                "result_message" => "Part not found",
+                "result_message" => "Database Query Fail",
             ]);
         }
 
@@ -206,6 +230,7 @@ class PartController extends Controller
      *              @OA\Property(property="result_message", type="string", example="Success", description="성공:EMPTY, 실패:에러메세지(데이터 포맷 미 일치"),
      *              @OA\Property(property="result_data", type="array",
      *                  @OA\Items(
+     *                      @OA\Property(property="id", type="int", description="Id", example="Id"),
      *                      @OA\Property(property="name", type="string", description="이름", example="이름 1"),
      *                      @OA\Property(property="description", type="string", description="설명", example="설명 1"),
      *                      @OA\Property(property="data_json", type="string", description="JSON 문자열", example="{}"),
@@ -230,12 +255,21 @@ class PartController extends Controller
             ]);
         }
 
-        $part = Part::create($request->all());
+        try {
+            $part = Part::create($request->all());
+        } catch (\Exception $e) {
+            Log::error("Database Save Fail: " . $e->getMessage());
+            return response()->json([
+                "result_code" => -1,
+                "result_message" => "Database Save Fail",
+            ]);
+        }
 
         return response()->json([
             "result_code" => 0,
             "result_message" => "Success",
             "result_data" => [
+                "id" => $part->id,
                 "name" => $part->name,
                 "description" => $part->description,
                 "data_json" => $part->data_json,

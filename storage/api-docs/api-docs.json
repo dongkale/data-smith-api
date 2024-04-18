@@ -294,6 +294,11 @@
                                             "type": "array",
                                             "items": {
                                                 "properties": {
+                                                    "id": {
+                                                        "description": "Id",
+                                                        "type": "integer",
+                                                        "example": "Id"
+                                                    },
                                                     "name": {
                                                         "description": "이름",
                                                         "type": "string",
