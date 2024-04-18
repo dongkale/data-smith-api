@@ -15,175 +15,18 @@
     },
     "servers": [
         {
-            "url": "/api/item"
+            "url": "/api/part"
         }
     ],
     "paths": {
-        "/test": {
-            "get": {
-                "tags": [
-                    "[TEST] API Get 테스트"
-                ],
-                "summary": "API Get 테스트",
-                "description": "API Get 테스트",
-                "operationId": "02207bb84b0e6add6934459cf395381d",
-                "parameters": [
-                    {
-                        "name": "param",
-                        "in": "query",
-                        "description": "요청 값",
-                        "required": true,
-                        "schema": {
-                            "type": "string"
-                        },
-                        "examples": {
-                            "string": {
-                                "summary": "paramter",
-                                "value": "1"
-                            }
-                        }
-                    },
-                    {
-                        "name": "params",
-                        "in": "query",
-                        "description": "요청 값들",
-                        "required": true,
-                        "schema": {
-                            "type": "string"
-                        },
-                        "examples": {
-                            "string": {
-                                "summary": "paramters",
-                                "value": "[1,2,3]"
-                            }
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "결과값",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "properties": {
-                                        "result_code": {
-                                            "description": "성공:0, 실패:-1",
-                                            "type": "integer",
-                                            "example": "0"
-                                        },
-                                        "result_message": {
-                                            "description": "성공:EMPTY, 실패:에러메세지",
-                                            "type": "string",
-                                            "example": ""
-                                        },
-                                        "result_data": {
-                                            "type": "array",
-                                            "items": {
-                                                "properties": {
-                                                    "param": {
-                                                        "description": "요청 param",
-                                                        "type": "string",
-                                                        "example": "1"
-                                                    },
-                                                    "params": {
-                                                        "description": "요청 param",
-                                                        "type": "string",
-                                                        "example": "[1,2,3]"
-                                                    }
-                                                },
-                                                "type": "object"
-                                            }
-                                        }
-                                    },
-                                    "type": "object"
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        },
-        "/testPost": {
-            "post": {
-                "tags": [
-                    "[TEST] API Post 테스트"
-                ],
-                "summary": "API Post 테스트",
-                "description": "API Post 테스트",
-                "operationId": "ed24f80b52230af150faaabe3d137bef",
-                "requestBody": {
-                    "content": {
-                        "application/json": {
-                            "schema": {
-                                "properties": {
-                                    "param": {
-                                        "description": "요청 값",
-                                        "type": "string",
-                                        "example": "1"
-                                    },
-                                    "params": {
-                                        "description": "요청 값들",
-                                        "type": "string",
-                                        "example": "[1,2,3]"
-                                    }
-                                },
-                                "type": "object"
-                            }
-                        }
-                    }
-                },
-                "responses": {
-                    "200": {
-                        "description": "결과값",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "properties": {
-                                        "result_code": {
-                                            "description": "성공:0, 실패:-1",
-                                            "type": "integer",
-                                            "example": "0"
-                                        },
-                                        "result_message": {
-                                            "description": "성공:Success, 실패:에러메세지",
-                                            "type": "string",
-                                            "example": ""
-                                        },
-                                        "result_data": {
-                                            "type": "array",
-                                            "items": {
-                                                "properties": {
-                                                    "param": {
-                                                        "description": "요청 param",
-                                                        "type": "string",
-                                                        "example": "1"
-                                                    },
-                                                    "params": {
-                                                        "description": "요청 param",
-                                                        "type": "string",
-                                                        "example": "[1,2,3]"
-                                                    }
-                                                },
-                                                "type": "object"
-                                            }
-                                        }
-                                    },
-                                    "type": "object"
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        },
-        "/items": {
+        "/list": {
             "get": {
                 "tags": [
                     "- 전체 리스트 요청"
                 ],
                 "summary": "",
                 "description": "전체 리스트 요청",
-                "operationId": "1ce86fb166d24e47d4923801b137ef2a",
+                "operationId": "4519c82ab6f988d56bb33a3f6c4acb2d",
                 "responses": {
                     "200": {
                         "description": "결과값",
@@ -199,7 +42,7 @@
                                         "result_message": {
                                             "description": "성공:Success, 실패:에러메세지",
                                             "type": "string",
-                                            "example": ""
+                                            "example": "Success"
                                         },
                                         "result_data": {
                                             "type": "array",
@@ -208,7 +51,7 @@
                                                     "name": {
                                                         "description": "이름",
                                                         "type": "string",
-                                                        "example": "sample_1"
+                                                        "example": "이름 1"
                                                     },
                                                     "description": {
                                                         "description": "설명",
@@ -216,9 +59,9 @@
                                                         "example": "설명 1"
                                                     },
                                                     "data_json": {
-                                                        "description": "json string",
+                                                        "description": "JSON 문자열",
                                                         "type": "string",
-                                                        "example": "{'number':1, 'string':'test'}"
+                                                        "example": "{}"
                                                     }
                                                 },
                                                 "type": "object"
@@ -231,33 +74,149 @@
                         }
                     }
                 }
-            },
-            "post": {
+            }
+        },
+        "/list/{id}": {
+            "get": {
                 "tags": [
-                    "- 아이템 저장"
+                    "- 지정 파츠 요청"
                 ],
                 "summary": "",
-                "description": "아이템 저장, 지정 이름, 설명을 json data로 요청하면 저장한다",
-                "operationId": "d4b4bdc9486ae3e0676b9c0e5cc42b61",
+                "description": "지정 파츠 요청",
+                "operationId": "e5372e443cea6e800b17e6f943e3bfa3",
+                "responses": {
+                    "200": {
+                        "description": "결과값",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "result_code": {
+                                            "description": "성공:0, 실패:-1",
+                                            "type": "integer",
+                                            "example": "0"
+                                        },
+                                        "result_message": {
+                                            "description": "성공:Success, 실패: 파츠가 존재 하지 않음",
+                                            "type": "string",
+                                            "example": "Success"
+                                        },
+                                        "result_data": {
+                                            "type": "array",
+                                            "items": {
+                                                "properties": {
+                                                    "name": {
+                                                        "description": "이름",
+                                                        "type": "string",
+                                                        "example": "이름 1"
+                                                    },
+                                                    "description": {
+                                                        "description": "설명",
+                                                        "type": "string",
+                                                        "example": "설명 1"
+                                                    },
+                                                    "data_json": {
+                                                        "description": "JSON 문자열",
+                                                        "type": "string",
+                                                        "example": "{}"
+                                                    }
+                                                },
+                                                "type": "object"
+                                            }
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/listByName/{name}": {
+            "get": {
+                "tags": [
+                    "- 지정 파츠 요청(name 지정)"
+                ],
+                "summary": "",
+                "description": "지정 파츠 요청",
+                "operationId": "a30f7f66017dd52a34856bd7544d80b9",
+                "responses": {
+                    "200": {
+                        "description": "결과값",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "result_code": {
+                                            "description": "성공:0, 실패:-1",
+                                            "type": "integer",
+                                            "example": "0"
+                                        },
+                                        "result_message": {
+                                            "description": "성공:Success, 실패:파츠가 존재 하지 않음",
+                                            "type": "string",
+                                            "example": "Success"
+                                        },
+                                        "result_data": {
+                                            "type": "array",
+                                            "items": {
+                                                "properties": {
+                                                    "name": {
+                                                        "description": "이름",
+                                                        "type": "string",
+                                                        "example": "이름 1"
+                                                    },
+                                                    "description": {
+                                                        "description": "설명",
+                                                        "type": "string",
+                                                        "example": "설명 1"
+                                                    },
+                                                    "data_json": {
+                                                        "description": "JSON 문자열",
+                                                        "type": "string",
+                                                        "example": "{}"
+                                                    }
+                                                },
+                                                "type": "object"
+                                            }
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/save": {
+            "post": {
+                "tags": [
+                    "- 파츠 저장"
+                ],
+                "summary": "",
+                "description": "파츠 저장, 지정 이름, 설명을 json data로 요청하면 저장한다",
+                "operationId": "83982f1c8038ef0325623908c7f4c4d6",
                 "requestBody": {
                     "content": {
                         "application/json": {
                             "schema": {
                                 "properties": {
                                     "name": {
-                                        "description": "이름",
+                                        "description": "이름 1",
                                         "type": "string",
-                                        "example": "sample_1"
+                                        "example": "이름 1"
                                     },
                                     "description": {
-                                        "description": "설명",
+                                        "description": "설명 1",
                                         "type": "string",
                                         "example": "설명 1"
                                     },
                                     "data_json": {
-                                        "description": "json string",
+                                        "description": "{}",
                                         "type": "string",
-                                        "example": "{'number':1, 'string':'test'}"
+                                        "example": "{}"
                                     }
                                 },
                                 "type": "object"
@@ -280,7 +239,7 @@
                                         "result_message": {
                                             "description": "성공:EMPTY, 실패:에러메세지(데이터 포맷 미 일치",
                                             "type": "string",
-                                            "example": ""
+                                            "example": "Success"
                                         },
                                         "result_data": {
                                             "type": "array",
@@ -289,7 +248,7 @@
                                                     "name": {
                                                         "description": "이름",
                                                         "type": "string",
-                                                        "example": "sample_1"
+                                                        "example": "이름 1"
                                                     },
                                                     "description": {
                                                         "description": "설명",
@@ -297,123 +256,9 @@
                                                         "example": "설명 1"
                                                     },
                                                     "data_json": {
-                                                        "description": "json string",
+                                                        "description": "JSON 문자열",
                                                         "type": "string",
-                                                        "example": "{'number':1, 'string':'test'}"
-                                                    }
-                                                },
-                                                "type": "object"
-                                            }
-                                        }
-                                    },
-                                    "type": "object"
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        },
-        "/items/{id}": {
-            "get": {
-                "tags": [
-                    "- 지정 아이템 요청"
-                ],
-                "summary": "",
-                "description": "지정 아이템 요청",
-                "operationId": "07b281b7f44ef98d4983434f2a810753",
-                "responses": {
-                    "200": {
-                        "description": "결과값",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "properties": {
-                                        "result_code": {
-                                            "description": "성공:0, 실패:-1",
-                                            "type": "integer",
-                                            "example": "0"
-                                        },
-                                        "result_message": {
-                                            "description": "성공:Success, 실패:아이템 존재 하지 않음",
-                                            "type": "string",
-                                            "example": ""
-                                        },
-                                        "result_data": {
-                                            "type": "array",
-                                            "items": {
-                                                "properties": {
-                                                    "name": {
-                                                        "description": "이름",
-                                                        "type": "string",
-                                                        "example": "sample_1"
-                                                    },
-                                                    "description": {
-                                                        "description": "설명",
-                                                        "type": "string",
-                                                        "example": "설명 1"
-                                                    },
-                                                    "data_json": {
-                                                        "description": "json string",
-                                                        "type": "string",
-                                                        "example": "{'number':1, 'string':'test'}"
-                                                    }
-                                                },
-                                                "type": "object"
-                                            }
-                                        }
-                                    },
-                                    "type": "object"
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        },
-        "/showByName/{name}": {
-            "get": {
-                "tags": [
-                    "- 지정 아이템 요청(name 지정)"
-                ],
-                "summary": "",
-                "description": "지정 아이템 요청",
-                "operationId": "f8bbe28fccf389772258e9b388284785",
-                "responses": {
-                    "200": {
-                        "description": "결과값",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "properties": {
-                                        "result_code": {
-                                            "description": "성공:0, 실패:-1",
-                                            "type": "integer",
-                                            "example": "0"
-                                        },
-                                        "result_message": {
-                                            "description": "성공:Success, 실패:아이템 존재 하지 않음",
-                                            "type": "string",
-                                            "example": ""
-                                        },
-                                        "result_data": {
-                                            "type": "array",
-                                            "items": {
-                                                "properties": {
-                                                    "name": {
-                                                        "description": "이름",
-                                                        "type": "string",
-                                                        "example": "sample_1"
-                                                    },
-                                                    "description": {
-                                                        "description": "설명",
-                                                        "type": "string",
-                                                        "example": "설명 1"
-                                                    },
-                                                    "data_json": {
-                                                        "description": "json string",
-                                                        "type": "string",
-                                                        "example": "{'number':1, 'string':'test'}"
+                                                        "example": "{}"
                                                     }
                                                 },
                                                 "type": "object"

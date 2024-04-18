@@ -3,7 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
-use App\Http\Controllers\Api\ItemController;
+use App\Http\Controllers\Api\PartController;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,22 +16,19 @@ use App\Http\Controllers\Api\ItemController;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
+Route::middleware("auth:sanctum")->get("/user", function (Request $request) {
     return $request->user();
 });
 
-Route::get("/test", [ItemController::class, "testGet"]);
-Route::post("/testPost", [ItemController::class, "testPost"]);
-
 Route::middleware(["logger"])->group(function () {
-    Route::prefix("item")->group(function() {
-        Route::get('items', [ItemController::class, 'index']);
-        Route::post('items', [ItemController::class, 'store']);
-        Route::get('items/{id}', [ItemController::class, 'show']);
-        Route::get('itemsByName/{name}', [ItemController::class, 'showByName']);
+    Route::prefix("part")->group(function () {
+        Route::get("/list", [PartController::class, "index"]);
+        Route::post("/save", [PartController::class, "store"]);
+        Route::get("/list/{id}", [PartController::class, "show"]);
+        Route::get("/listByName/{name}", [PartController::class, "partByName"]);
+
+        // Route::get("/{id}", [ItemController::class, "show"]);
         // Route::put('items/{id}', [ItemController::class, 'update']);
-        // Route::delete('items/{id}', [ItemController::class, 'destroy']);    
+        // Route::delete('items/{id}', [ItemController::class, 'destroy']);
     });
 });
-
-
